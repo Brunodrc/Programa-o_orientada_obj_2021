@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrar uma sequência decrescente de números</title>
+    <style>
+        body {
+    background: #84ffff;
+    font: normal 20pt times;
+}
+header {
+    color: rgb(15, 15, 15);
+    text-align: center;
+}
+div.entrada {
+    background: #ffcdd2;
+    border-radius: 13px;
+    padding: 15px;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.384);
+}
+div.saída {
+    background: #ffffff;
+    border-radius: 13px;
+    padding: 15px;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.384);
+}
+IMG.abaixo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
+}
+footer {
+    color: black;
+    text-align: center;
+    font-style: oblique;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Visualize uma sequência decrescente
+        </h1>
+    </header>
+    <section>
+        <div class="entrada">
+            <p >
+                Digite o primeiro número: <input style="font: normal 20pt times; width: 70px; height: 30px;" type="number" id="txtini">
+            </p>
+            <p style="text-align: center;">
+                <input style="font: normal 20pt times;" type="button" value="Vamos contar!" onclick="Congatem()">
+            </p>
+
+        </div>
+        <div class="saída" id="saida">
+            
+        </div>
+    </section>
+    <footer>
+        <p>&copy; BrunoCastro </p>
+    </footer>
+    <script>
+        function Congatem() {
+            const entrada1 = window.document.querySelector('input#txtini')
+            var inicio = Number(entrada1.value)
+            let contador = 0
+            let soma = 0
+            var saida = window.document.querySelector('div#saida')
+            saida.innerHTML = "Inciando a contagem: <br>"
+            
+            for (var i = inicio; inicio > -1 ; inicio -=1) {
+                contador += 1
+                soma = soma + inicio
+                saida.innerHTML += `${inicio} &#x1F574`
+            }
+            saida.innerHTML += `<p>O somatório = ${soma}</p><p>A média = ${soma/contador}</p>`
+
+        }
+
+    </script>
+</html>

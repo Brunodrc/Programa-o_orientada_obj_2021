@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remover as vogais de uma sentença</title>
+    <style>
+        body {
+    background: #ff9800;
+    font: normal 20pt times;
+}
+header {
+    color: rgb(15, 15, 15);
+    text-align: center;
+}
+div.entrada {
+    background: #59c4ee;
+    border-radius: 13px;
+    padding: 15px;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.384);
+}
+div.saída {
+    background: #e0e0e0;
+    border-radius: 13px;
+    padding: 15px;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.384);
+}
+footer {
+    color: black;
+    text-align: center;
+    font-style: oblique;
+}
+    </style>
+</head>
+<body>
+    <header><h1>
+        Escreva uma frase e removeremos as vogias digitadas.
+    </h1></header>
+    <section>
+        <div class="entrada">
+            Digite uma frase: <input style="font: normal 20pt times; width: 290px; height: 30px;" id="txtfra">
+            <p><input style="font: normal 20pt times;" type="button" value="Vamos substituir!" onclick="remover()"></p>
+        </div>
+        <div class="saída" id="saida">
+
+        </div>
+    </section>
+    <section>
+        <footer>
+            <p>&copy; BrunoCastro </p>
+        </footer>
+    </section>
+</body>
+<script>
+   function remover(){
+       const entrada = document.querySelector('input#txtfra')
+       let frase = entrada.value
+       let saida = document.querySelector('div#saida')
+       let nova_frase = ""
+       for(let i = 0;i < frase.length; i+=1){
+           if((frase[i] == 'a') || (frase[i] == 'A') || (frase[i] == 'e') || (frase[i] == 'E') || (frase[i] == 'É')|| (frase[i] == 'é') || (frase[i] == 'i')|| (frase[i] == 'I') || (frase[i] == 'o') || (frase[i] == 'O') || (frase[i] == 'u') || (frase[i] == 'U')){
+               nova_frase = nova_frase + " "
+           } else {
+               nova_frase = nova_frase + frase[i]
+           }
+       }
+    
+      
+       saida.innerHTML = `Frase digitada: ${frase}.`
+       saida.innerHTML += `<p> A nova frase: <strong>${nova_frase}</strong>.</p>`
+   }
+</script>
+</html>

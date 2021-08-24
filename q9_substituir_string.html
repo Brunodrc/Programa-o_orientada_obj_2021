@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Substituir caractere numa sentença</title>
+    <style>
+        body {
+    background: #e3f2fd;
+    font: normal 20pt times;
+}
+header {
+    color: rgb(15, 15, 15);
+    text-align: center;
+}
+div.entrada {
+    background: #59c4ee;
+    border-radius: 13px;
+    padding: 15px;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.384);
+}
+div.saída {
+    background: #e0e0e0;
+    border-radius: 13px;
+    padding: 15px;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.384);
+}
+footer {
+    color: black;
+    text-align: center;
+    font-style: oblique;
+}
+    </style>
+</head>
+<body>
+    <header><h1>
+        Escreva uma frase e indique dois carateres para serem substituidos na frase.
+    </h1></header>
+    <section>
+        <div class="entrada">
+            Digite uma frase: <input style="font: normal 20pt times; width: 290px; height: 30px;" id="txtfra">
+            <p>Digite o caractere que quer substituir: <input style="font: normal 20pt times; width: 70px; height: 30px;"  id="txtcar1"></p>    
+            <p>Digite o caractere que ficará no lugar: <input style="font: normal 20pt times; width: 70px; height: 30px;"  id="txtcar2"></p>    
+            <p><input style="font: normal 20pt times;" type="button" value="Vamos substituir!" onclick="Substituir()"></p>
+        </div>
+        <div class="saída" id="saida">
+
+        </div>
+    </section>
+    <section>
+        <footer>
+            <p>&copy; BrunoCastro </p>
+        </footer>
+    </section>
+</body>
+<script>
+   function Substituir(){
+       const entrada = document.querySelector('input#txtfra')
+       const entrada2 = document.querySelector('input#txtcar1')
+       const entrada3 = document.querySelector('input#txtcar2')
+       let frase = entrada.value
+       let carac1 = entrada2.value
+       let carac2 = entrada3.value
+       let saida = document.querySelector('div#saida')
+       let nova_frase = ""
+       for(let i = 0;i < frase.length; i+=1){
+           if(frase[i] == carac1[0]){
+               nova_frase = nova_frase + carac2[0]
+           } else {
+               nova_frase = nova_frase + frase[i]
+           }
+       }
+    
+      
+       saida.innerHTML = `Frase digitada: ${frase}.`
+       saida.innerHTML += `<p> A nova frase: ${nova_frase}.</p>`
+   }
+</script>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificar qual é o mês</title>
+    <style>
+        body {
+    background: #e0e262;
+    font: normal 20pt times;
+}
+header {
+    color: rgb(15, 15, 15);
+    text-align: center;
+}
+div.entrada {
+    background: #59c4ee;
+    border-radius: 13px;
+    padding: 15px;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.384);
+}
+div.saída {
+    background: #ececea;
+    border-radius: 13px;
+    padding: 15px;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.384);
+}
+IMG.abaixo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
+}
+footer {
+    color: black;
+    text-align: center;
+    font-style: oblique;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Indicar o mês.</h1>
+    </header>
+    <section>
+        <div class="entrada">
+            <p >
+                Digite o número inteiro: <input style="font: normal 20pt times; width: 50px; height: 30px;" type="number" id="txtnum">
+            </p>
+            <p style="text-align: center;">
+                <input style="font: normal 20pt times;" type="button" value="Identificar!" onclick="identificar()">
+            </p>
+
+        </div>
+        <div class="saída" id="saida">
+            
+        </div>
+    </section>
+    <footer>
+        <p>&copy; BrunoCastro </p>
+    </footer>
+    <script>
+        function identificar() {
+            const entrada = window.document.querySelector('input#txtnum')
+            const mes = Number(entrada.value)
+            const saida = window.document.querySelector('div#saida')
+            switch (mes) {
+                case 1: 
+                    saida.innerHTML = `<p> O mês indicado foi <strong>Janeiro</strong>.<p>`
+                    break
+                case 2:
+                    saida.innerHTML = `<p> O mês indicado foi <strong>Fevereiro</strong>.<p>`
+                    break 
+                case 3:
+                    saida.innerHTML = `<p> O mês indicado foi <strong>Março</strong>.<p>`
+                    break 
+                case 4:
+                    saida.innerHTML = `<p> O mês indicado foi <strong>Abril</strong>.<p>`
+                    break 
+                case 5:
+                    saida.innerHTML = `<p> O mês indicado foi <strong>Maio</strong>.<p>`
+                    break 
+                case 6:
+                    saida.innerHTML = `<p> O mês indicado foi <strong>Junho</strong>.<p>`
+                    break 
+                case 7:
+                    saida.innerHTML = `<p> O mês indicado foi <strong>Julho</strong>.<p>`
+                    break 
+                case 8:
+                    saida.innerHTML = `<p> O mês indicado foi <strong>Agosto</strong>.<p>`
+                    break 
+                case 9:
+                    saida.innerHTML = `<p> O mês indicado foi <strong>Setembro</strong>.<p>`
+                    break 
+                case 10:
+                    saida.innerHTML = `<p> O mês indicado foi <strong>Outubro</strong>.<p>`
+                    break 
+                case 11:
+                    saida.innerHTML = `<p> O mês indicado foi <strong>Novembro</strong>.<p>`
+                    break 
+                case 12:
+                    saida.innerHTML = `<p> O mês indicado foi <strong>Dezembro</strong>.<p>`
+                    break 
+                default:
+                    saida.innerHTML = `<p><strong>Mês inválido!</strong><p>`
+                    break 
+
+            }
+
+        }
+
+    </script>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vetor de 5 posições</title>
+    <style>
+        body {
+    background: #e3f2fd;
+    font: normal 20pt times;
+}
+header {
+    color: rgb(15, 15, 15);
+    text-align: center;
+}
+div.entrada {
+    background: #59c4ee;
+    border-radius: 13px;
+    padding: 15px;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.384);
+}
+div.saída {
+    background: #e0e0e0;
+    border-radius: 13px;
+    padding: 15px;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.384);
+}
+footer {
+    color: black;
+    text-align: center;
+    font-style: oblique;
+}
+    </style>
+</head>
+<body>
+    <header><h1>
+        Criar um vetor simples de 5 posições
+    </h1></header>
+    <section>
+        <div class="entrada">
+            Digite um número: <input style="font: normal 20pt times; width: 70px; height: 30px;" type="number" id="txtini">
+            
+            <input style="font: normal 20pt times;" type="button" value="Vamos criar!" onclick="Criar()">
+        </div>
+        <div class="saída" id="saida">
+
+        </div>
+    </section>
+    <section>
+        <footer>
+            <p>&copy; BrunoCastro </p>
+        </footer>
+    </section>
+</body>
+<script>
+   function Criar(){
+       const entrada = document.querySelector('input#txtini')
+       let num = Number(entrada.value)
+       let saida = document.querySelector('div#saida')
+       let fim = num + 5
+       let vetor = []
+       for(i = num; num < fim; num+=1){
+           vetor.push(num)
+       }
+       saida.innerHTML = `O vetor possui ${vetor.length} elementos, são eles: ${vetor}.`
+   }
+</script>
+</html>

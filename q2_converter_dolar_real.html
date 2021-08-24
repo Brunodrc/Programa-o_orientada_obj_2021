@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor: Dólar para Real</title>
+    <style>
+        body {
+    background: #888871;
+    font: normal 20pt times;
+}
+header {
+    color: rgb(15, 15, 15);
+    text-align: center;
+}
+div.entrada {
+    background: #59c4ee;
+    border-radius: 13px;
+    padding: 15px;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.384);
+}
+div.saída {
+    background: #ececea;
+    border-radius: 13px;
+    padding: 15px;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.384);
+}
+footer {
+    color: black;
+    text-align: center;
+    font-style: oblique;
+}
+    </style>
+</head>
+<body>
+    <header><h1>
+        Converter um valor de dólar para real.
+    </h1></header>
+    <section>
+        <div class="entrada">
+            <p >
+                Quantos dólares $: <input style="font: normal 20pt times; width: 70px; height: 30px;" type="number" id="txtdol">
+                Cotação hoje R$: <input style="font: normal 20pt times; width: 50px; height: 30px;" type="number" id="txtcot">
+            </p>
+            <p style="text-align: center;">
+                <input style="font: normal 20pt times;" type="button" value="Fazer a conversão!" onclick="Converter()">
+            </p>
+        </div>
+        <div class="saída" id="saida">
+
+        </div>
+    </section>
+    <section>
+        <footer>
+            <p>&copy; BrunoCastro </p>
+        </footer>
+    </section>
+</body>
+<script>
+    function Converter() {
+            const entrada1 = window.document.querySelector('input#txtdol')
+            const entrada2 = window.document.querySelector('input#txtcot')
+            const dolar = Number(entrada1.value)
+            const cotação = Number(entrada2.value)
+            const conversão = dolar * cotação
+            const saida = window.document.querySelector('div#saida')
+            saida.innerHTML = `<p> O valor $ ${dolar.toFixed(2)}, pela contação R$ ${cotação.toFixed(2)}, convertido para reais é R$ <strong>${conversão.toFixed(2)}</strong>.<p>`
+
+        }
+</script>
+</html>

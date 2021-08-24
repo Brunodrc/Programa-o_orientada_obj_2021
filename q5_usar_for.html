@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrar uma sequência de números</title>
+    <style>
+        body {
+    background: #e0e262;
+    font: normal 20pt times;
+}
+header {
+    color: rgb(15, 15, 15);
+    text-align: center;
+}
+div.entrada {
+    background: #59c4ee;
+    border-radius: 13px;
+    padding: 15px;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.384);
+}
+div.saída {
+    background: #ececea;
+    border-radius: 13px;
+    padding: 15px;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.384);
+}
+IMG.abaixo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
+}
+footer {
+    color: black;
+    text-align: center;
+    font-style: oblique;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Apresentar uma sequência de números</h1>
+    </header>
+    <section>
+        <div class="entrada">
+            <p >
+                Digite o primeiro número: <input style="font: normal 20pt times; width: 70px; height: 30px;" type="number" id="txtini">
+            </p>
+            <p >
+                Digite último número da sequência: <input style="font: normal 20pt times; width: 70px; height: 30px;" type="number" id="txtult">
+            </p>
+            <p style="text-align: center;">
+                <input style="font: normal 20pt times;" type="button" value="Vamos contar!" onclick="Congatem()">
+            </p>
+
+        </div>
+        <div class="saída" id="saida">
+            
+        </div>
+    </section>
+    <footer>
+        <p>&copy; BrunoCastro </p>
+    </footer>
+    <script>
+        function Congatem() {
+            const entrada1 = window.document.querySelector('input#txtini')
+            const entrada2 = window.document.querySelector('input#txtult')
+            var inicio = Number(entrada1.value)
+            var fim = Number(entrada2.value)
+            var saida = window.document.querySelector('div#saida')
+            saida.innerHTML = "Inciando a contagem: <br>"
+            
+            for (var i = inicio; inicio <= fim; inicio +=1) {
+                saida.innerHTML += `${inicio} &#x1F407`
+            }
+
+        }
+
+    </script>
+</html>

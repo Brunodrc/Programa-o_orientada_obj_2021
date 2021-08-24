@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificar porcentagem</title>
+    <style>
+        body {
+    background: #f0f01f;
+    font: normal 20pt times;
+}
+header {
+    color: rgb(15, 15, 15);
+    text-align: center;
+}
+div.entrada {
+    background: #59c4ee;
+    border-radius: 13px;
+    padding: 15px;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.384);
+}
+div.saída {
+    background: #a4e8eb;
+    border-radius: 13px;
+    padding: 15px;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.384);
+}
+footer {
+    color: black;
+    text-align: center;
+    font-style: oblique;
+}
+    </style>
+</head>
+<body>
+    <header><h1>
+        Calcular a porcentagem de um valor sobre outro.
+    </h1></header>
+    <section>
+        <div class="entrada">
+            <p >
+                Indique o valor total: <input style="font: normal 20pt times; width: 70px; height: 30px;" type="number" id="txttot">
+                Indique qual a porcentagem deseja: <input style="font: normal 20pt times; width: 50px; height: 30px;" type="number" id="txtpor"> %
+            </p>
+            <p style="text-align: center;">
+                <input style="font: normal 20pt times;" type="button" value="Calcuar!" onclick="calcular()">
+            </p>
+        </div>
+        <div class="saída" id="saida">
+
+        </div>
+    </section>
+    <section>
+        <footer>
+            <p>&copy; BrunoCastro </p>
+        </footer>
+    </section>
+</body>
+<script>
+    function calcular() {
+            const entrada1 = window.document.querySelector('input#txttot')
+            const entrada2 = window.document.querySelector('input#txtpor')
+            const total = Number(entrada1.value)
+            const percent = Number(entrada2.value)
+            function porcentagem(total,percentual){
+                let porcent = (percentual / 100) * total
+                return porcent
+
+            }
+
+            let saida = window.document.querySelector('div#saida')
+            saida.innerHTML = `<p> ${percent} % de ${total} é  <strong>${porcentagem(total,percent).toFixed(0)}</strong>.<p>`
+
+        }
+</script>
+</html>

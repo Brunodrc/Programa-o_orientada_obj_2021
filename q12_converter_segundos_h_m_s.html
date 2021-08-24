@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Converter segundos em horas, minutos e segundos</title>
+    <style>
+        body {
+    background: #ec92e0;
+    font: normal 20pt times;
+}
+header {
+    color: rgb(15, 15, 15);
+    text-align: center;
+}
+div.entrada {
+    background: #59c4ee;
+    border-radius: 13px;
+    padding: 15px;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.384);
+}
+div.saída {
+    background: #e6b4b4;
+    border-radius: 13px;
+    padding: 15px;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.384);
+}
+footer {
+    color: black;
+    text-align: center;
+    font-style: oblique;
+}
+    </style>
+</head>
+<body>
+    <header><h1>
+        Converter segundos para o formato hh:mm:ss
+    </h1></header>
+    <section>
+        <div class="entrada">
+            <p >
+                Indique quantos segndos: <input style="font: normal 20pt times; width: 70px; height: 30px;" type="number" id="txtseg">
+            </p>
+            <p style="text-align: center;">
+                <input style="font: normal 20pt times;" type="button" value="Converter!" onclick="calcular()">
+            </p>
+        </div>
+        <div class="saída" id="saida">
+
+        </div>
+    </section>
+    <section>
+        <footer>
+            <p>&copy; BrunoCastro </p>
+        </footer>
+    </section>
+</body>
+<script>
+    function calcular() {
+            const entrada1 = window.document.querySelector('input#txtseg')
+            let segundos = Number(entrada1.value)
+            
+            function convert_seg(segundos){
+                let horas = parseInt(segundos/3600)
+                segundos %= 3600
+                let minutos = parseInt(segundos/60)
+                let seg_final = segundos % 60
+                return horas, minutos, seg_final
+
+            }
+
+            let saida = window.document.querySelector('div#saida')
+            //let horas, minutos, segundos = convert_seg(segundos)
+            saida.innerHTML = `resultado ${convert_seg(segundos)}`
+
+        }
+</script>
+</html>

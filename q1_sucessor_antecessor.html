@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antecessor e sucessor de número inteiro</title>
+    <style>
+        body {
+    background: #e0e262;
+    font: normal 20pt times;
+}
+header {
+    color: rgb(15, 15, 15);
+    text-align: center;
+}
+div.entrada {
+    background: #59c4ee;
+    border-radius: 13px;
+    padding: 15px;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.384);
+}
+div.saída {
+    background: #ececea;
+    border-radius: 13px;
+    padding: 15px;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.384);
+}
+IMG.abaixo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
+}
+footer {
+    color: black;
+    text-align: center;
+    font-style: oblique;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Identificar o antecessor e o sucessor de um número inteiro</h1>
+    </header>
+    <section>
+        <div class="entrada">
+            <p >
+                Digite o número inteiro: <input style="font: normal 20pt times; width: 50px; height: 30px;" type="number" id="txtnum">
+            </p>
+            <p style="text-align: center;">
+                <input style="font: normal 20pt times;" type="button" value="Identificar!" onclick="identificar()">
+            </p>
+
+        </div>
+        <div class="saída" id="saida">
+            
+        </div>
+    </section>
+    <footer>
+        <p>&copy; BrunoCastro </p>
+    </footer>
+    <script>
+        function identificar() {
+            const entrada = window.document.querySelector('input#txtnum')
+            const inteiro = Number(entrada.value)
+            const antecessor = inteiro - 1
+            const sucecessor = inteiro + 1
+            const saida = window.document.querySelector('div#saida')
+            saida.innerHTML = `<p> O inteiro indicado foi ${inteiro}, seu antecessor é ${antecessor} e o seu sucessor é ${sucecessor}.<p>`
+
+        }
+
+    </script>
+</html>
