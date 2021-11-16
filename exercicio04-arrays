@@ -1,0 +1,52 @@
+/*
+INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E
+TECNOLOGIA DO PIAUÍ
+Curso: ADS
+Disciplina: Programação Orientada a Objetos
+Professor: Ely
+Aluno: BRUNO CASTRO
+*/
+/*                    _____ RESPOSTAS EX_04 ARRAYS _____*/
+// 01 -  array de números e código que exibe a soma dos elementos do array
+console.log("~~~~~Resposta questão 1~~~~~")
+let num : number[] = [1,2,3,4,5,6];
+let soma:number = 0;
+
+for(let i: number =0; i<num.length; i++){
+    soma = soma + num[i];
+}
+console.log(soma)
+console.log("~~~~~FIM Resposta questão 1~~~~~")
+
+//02 - descrever a execução do for com array
+/* Ao executar o código será mostrado na tela todos os elementos do array, no entanto como a condição é i <= a.length o último elemento será undefined, porque o array vai até 4 e o método retorna 5, indicando que há 5 elementos no array*/
+
+//03 - imprimir um array numerico em ordem crescente e decrescente.
+
+console.log("~~~~~Resposta questão 3~~~~~")
+let numeros: number[] = [2,4,6,8,10,12,14,16,18,20]
+
+
+console.log(numeros.reverse()); // imprime em ordem decrescente
+/*função auxiliar para imprimir em ordem crescente, pois a ordenação sem essa função ficaria errada, já 
+que a ordenação seguiria a codificação de caracteres a qual, porexemplo, o 10 é anterior ao 2 porque inicia com 1.*/
+function compararnum(a:number, b:number):number{
+    return a - b
+}
+console.log(numeros.sort(compararnum)); // imprime em ordem crescente
+console.log("~~~~~FIM Resposta questão 3~~~~~")
+
+console.log("-----Resposta questão 4-----")
+//04 - maninupar a string "Instituto Federal do Piauí"
+
+let uni:string = "Instituto Federal do Piauí";
+
+//Exibir a string toda em maiúsculo;
+console.log(uni.toUpperCase())
+//Retornar o caractere da posição 10;
+console.log(`O caractere da posição 10 é ${uni.charAt(10)}.`);
+//Retornar a última posição da vogal “o”;
+console.log(`A última posição da vogal “o” é ${uni.indexOf('o',9)}.`)
+//Dividir a frase em um array de strings, delimitando os caracteres por espaço.
+console.log(uni.split(" "))
+console.log("-----FIM Resposta questão 4-----")
