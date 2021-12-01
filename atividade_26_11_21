@@ -1,0 +1,228 @@
+/*
+NSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E
+TECNOLOGIA DO PIAUÍ
+Curso: ADS
+Disciplina: Programação Orientada a Objetos
+Professor: Ely
+Aluno: BRUNO CASTRO
+*/
+/*                  __________ RESPOSTAS ATIVIDADE 26/11/21 _____________*/
+
+/* Resposta-1
+a-F; b-F; c-V; d-F; e-V; f-V; g-F; h-V
+*/
+
+/* Resposta -2 */
+console.log("Resposta questão 2:")
+
+class Triangulo{
+    ladoA:number;
+    ladoB:number;
+    ladoC:number;
+
+    constructor(a:number, b:number, c:number){
+        this.ladoA = a;
+        this.ladoB = b;
+        this.ladoC =c;
+    }
+
+    ehtriangulo(a:number, b:number, c:number):boolean{
+        let formatriangulo = false;
+        if ((this.ladoA<this.ladoB +this.ladoC) && (this.ladoB<this.ladoA +this.ladoC) && (this.ladoC<this.ladoA+this.ladoC)){
+            formatriangulo = true;
+        }
+        return formatriangulo;
+    }
+
+    ehEquilatero(tipo_triangulo:Triangulo):boolean{
+        let triangulocheck= tipo_triangulo.ehtriangulo(this.ladoA,this.ladoB,this.ladoC);
+        if(triangulocheck == false){
+            return triangulocheck;
+        } else{
+            if (this.ladoA==this.ladoB && this.ladoB ==this.ladoC){
+                triangulocheck = true;
+                return triangulocheck; //é equilatero
+            } else{
+                triangulocheck = false;
+                return triangulocheck;
+            }
+        }
+    }
+    ehEscaleno(tipo_triangulo:Triangulo):boolean{
+        let triangulocheck = tipo_triangulo.ehtriangulo(this.ladoA, this.ladoB, this.ladoC);
+        if(triangulocheck == false){
+            return triangulocheck;
+        } else {
+            if(tipo_triangulo.ehEquilatero(tipo_triangulo)){
+                triangulocheck = false;
+                return triangulocheck;
+            } else {
+                if(tipo_triangulo.ehEquilatero(tipo_triangulo)){
+                    triangulocheck = false;
+                    return triangulocheck;
+                } else {
+                    if ((this.ladoA==this.ladoB && this.ladoB !=this.ladoC) || (this.ladoB==this.ladoC && this.ladoB !=this.ladoA)||(this.ladoA==this.ladoC && this.ladoA !=this.ladoB)){
+                        triangulocheck = false;
+                        return triangulocheck; 
+                    } else {
+                        triangulocheck = true; //é escaleno 
+                        return triangulocheck;
+                    }
+                }
+            }
+        }
+    }
+    
+    ehIsosceles(tipo_triangulo:Triangulo):boolean{
+        let triangulocheck = tipo_triangulo.ehtriangulo(this.ladoA, this.ladoB, this.ladoC);
+        if(triangulocheck == false){
+            return triangulocheck;
+        } else{
+            if(tipo_triangulo.ehEquilatero(tipo_triangulo)){
+                triangulocheck = false;
+                return triangulocheck;
+            } else {
+                if ((this.ladoA==this.ladoB && this.ladoB !=this.ladoC) || (this.ladoB==this.ladoC && this.ladoB !=this.ladoA)||(this.ladoA==this.ladoC && this.ladoA !=this.ladoB)){
+                    triangulocheck = true;
+                    return triangulocheck; // é isosceles
+                } else {
+                    triangulocheck = false;
+                    return triangulocheck;
+                }
+               
+            }
+        }
+
+    }
+}
+
+let tri1: Triangulo = new Triangulo(5,10,9);
+/*console.log(tri1.ehIsosceles(tri1));
+console.log(tri1.ehEscaleno(tri1));
+console.log(tri1.ehEquilatero(tri1));
+*/
+let tri2: Triangulo = new Triangulo(5,6,12);
+console.log(tri2.ehIsosceles(tri2));
+console.log(tri2.ehEscaleno(tri2));
+console.log(tri2.ehEquilatero(tri2));
+
+console.log()
+console.log("-----FIM RESPOSTA QUESTÃO 2-------")
+
+//RESPOSTA QUESTÃO 3
+console.log("----Resposta questão 3:")
+
+class Conta{
+    numero:string;
+    saldo:number;
+
+    constructor(numero:string, saldo:number){
+        this.numero = numero;
+        this.saldo = saldo;
+    }
+
+    sacar(valor:number): boolean{
+        let saldoOK: boolean = false;
+        
+        if(this.saldo - valor>0){
+            this.saldo = this.saldo - valor;
+            saldoOK = true;
+        } else{
+            console.log("Saldo insuficiente!");
+        }
+        return saldoOK;
+    }
+
+    depositar(valor:number): void{
+        this.saldo = this.saldo +valor;
+    }
+
+    transferir(conta_destino:Conta, valor): void{
+        let pode_sacar:boolean = this.sacar(valor);
+        if(pode_sacar == true){
+            conta_destino.depositar(valor);
+        }
+    }
+}
+// o cadastro do objeto conta será feito na classe banco que contem array de contas
+class Banco {
+    contas: Conta[] =[];
+
+    selecionar_conta(numero:string): Conta{
+        let conta_selecionada:Conta; // inicializada nula
+        for(let conta of this.contas){
+            if (conta.numero == numero){
+                conta_selecionada = conta;
+                break;
+            }
+        }
+        return conta_selecionada;
+    }
+    inserir(conta:Conta): void{
+        if(this.contas.length ==0){
+            this.contas.push(conta);
+        } else {
+            for (let i:number =0; i<this.contas.length;i++){
+                if(conta.numero == this.contas[i].numero){
+                    console.log("Conta já existente, não é possível criar novamente");
+                    break;
+                } else{
+                    this.contas.push(conta);
+                    break;
+                }
+            }
+        }
+    }
+
+    sacar_banco(numero:string, valor:number):void{
+        if(this.selecionar_conta(numero)!=null){
+            this.selecionar_conta(numero).sacar(valor);
+        } else{
+            console.log("[ERRO] Não é possível realizar a operação.");
+        }
+    }
+    transferir(numero_creditar:string, numero_debitar:string, valor:number): void{
+        if ((this.selecionar_conta(numero_creditar) != null) && (this.selecionar_conta(numero_debitar) !=null)){
+            this.sacar_banco(numero_debitar,valor); 
+            this.selecionar_conta(numero_creditar).depositar(valor)
+        }
+    }
+    qtd_contas(): number{
+        let qtd:number = this.contas.length;
+        return qtd;
+    }
+    media_saldos():number{
+        let soma:number = 0;
+        let media:number;
+        for(let c:number=0; c<this.contas.length; c++){
+            soma = this.contas[c].saldo + soma;
+        }
+        media = soma / this.contas.length;
+        return media;
+    }
+    
+}
+let novo_Banco: Banco = new Banco();
+novo_Banco.inserir(new Conta("1",1100));
+novo_Banco.inserir(new Conta("3",2000));
+novo_Banco.inserir(new Conta("2",1300));
+novo_Banco.inserir(new Conta("4",4100));
+//console.log(novo_Banco.selecionar_conta("2"));
+// teste conta repetida
+novo_Banco.inserir(new Conta("1",4));
+novo_Banco.inserir(new Conta("5",5000));
+//console.log(novo_Banco.selecionar_conta("5"));
+
+console.log(`A conta ${novo_Banco.selecionar_conta("1")} possui o saldo de ${novo_Banco.selecionar_conta("1").saldo}`);
+// resposta 3.b sacar
+novo_Banco.sacar_banco('5',500);
+console.log(novo_Banco.selecionar_conta('5'));
+
+// resposta 3.c transferir
+novo_Banco.transferir('1','5',1000);
+console.log(novo_Banco.selecionar_conta('5'));
+console.log(novo_Banco.selecionar_conta('1'));
+
+// resposta 3.d métodos: quantida de contas, total de dinheiro depositado e media de saldo
+console.log(novo_Banco.qtd_contas());
+console.log(novo_Banco.media_saldos());
