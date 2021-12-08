@@ -1,0 +1,356 @@
+/*
+NSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E
+TECNOLOGIA DO PIAUÍ
+Curso: ADS
+Disciplina: Programação Orientada a Objetos
+Professor: Ely
+Aluno: BRUNO CASTRO
+*/
+/*                  __________ RESPOSTAS ATIVIDADE 06/12/21 _____________*/
+
+console.log("Resposta questão 1:")
+
+class Calculadora{
+    private operando1:number;
+    private operando2:number;
+
+    constructor(x:number, y:number){
+        this.operando1 = x;
+        this.operando2 = y;
+    }
+    
+    somar():number{
+        let soma:number;
+        soma = this.operando1 + this.operando2;
+        return soma;
+    }
+
+    multiplicar():number{
+        let multiplo:number;
+        multiplo = this.operando1 * this.operando2;
+        return multiplo;
+    }
+
+
+}
+let cal1:Calculadora = new Calculadora(4,8);
+//console.log(`Os números usados na operação são ${cal1.operando1} e ${cal1.operando2}`);
+//Os operandos são privados e podem ser manipulados apenas dentro da classe.
+console.log("A soma dos números é", + cal1.somar());
+console.log("A multiplicação dos números é", + cal1.multiplicar());
+
+console.log("-----FIM RESPOSTA QUESTÃO 1-------")
+
+//RESPOSTA QUESTÃO 2
+console.log("----Resposta questão 2:")
+class Hora{
+    private hora:number;
+    private minuto:number;
+    private seggundo:number;
+
+    constructor(hh:number, mm:number, ss:number){
+        this.hora = hh;
+        this.minuto = mm;
+        this.seggundo = ss;
+    }
+    
+    gethora():number{
+        return this.hora;
+    }
+
+    getminuto():number{
+        return this.minuto;
+    }
+
+    getsegundo():number{
+        return this.seggundo;
+    }
+
+    formatohh():string{
+        let formatohh:string = `${this.hora}:${this.minuto}:${this.seggundo}`
+        return formatohh;
+    }
+
+}
+let hagora:Hora = new Hora(9,39,7);
+console.log(`A hora é ${hagora.gethora()}`);
+console.log(`Minutos: ${hagora.getminuto()}`);
+console.log(`Segundos: ${hagora.getsegundo()}`);
+console.log(`Hora certa: ${hagora.formatohh()}`);
+
+console.log("-----FIM RESPOSTA QUESTÃO 2-------")
+//RESPOSTA QUESTÃO 3
+console.log("----Resposta questão 3:")
+
+class Conta {
+	numero: string;
+	saldo: number;
+
+    constructor(numero: string, saldoInicial: number) {
+		this.numero = numero;
+		this.saldo = saldoInicial;
+	}
+
+	sacar(valor: number): void {
+		if (this.saldo >= valor) {
+			this.saldo = this.saldo - valor;
+		}
+	}
+
+	depositar(valor: number): void {
+		this.saldo = this.saldo + valor;
+	}
+
+	transferir(contaDestino: Conta, valor: number): void {
+		this.sacar(valor);
+		contaDestino.depositar(valor);
+	}
+
+}
+
+class Banco {
+	private contas: Conta[] = [];
+	
+	inserir(conta: Conta): void {
+        let contaConsultada = this.consultar(conta.numero);
+
+        if (contaConsultada == null) {
+		    this.contas.push(conta);
+        }
+	}
+	
+	consultar(numero: string): Conta {
+		let contaConsultada: Conta;
+		for (let conta of this.contas) {
+			if (conta.numero == numero) {
+				contaConsultada = conta;
+				break;
+			}
+		}
+		return contaConsultada;
+	}
+
+	private consultarPorIndice(numero: string): number {
+		let indice: number = -1;
+		for (let i: number = 0; i < this.contas.length; i++) {
+			if (this.contas[i].numero == numero) {
+				indice = i;
+				break;
+			}
+		}
+		return indice;
+	}
+
+	alterar(conta: Conta): void {
+		let indice: number = this.consultarPorIndice(conta.numero);
+		if (indice != -1) {
+			this.contas[indice] = conta;
+		}
+	}
+
+	excluir(numero: string): void {
+		let indice: number = this.consultarPorIndice(numero);
+		
+		if (indice != -1) {
+			for (let i: number = indice; i < this.contas.length; i++) {
+				this.contas[i] = this.contas[i+1];
+			}
+
+			this.contas.pop();
+		} 
+	}
+
+	depositar(numero: string, valor: number): void {
+		let contaConsultada = this.consultar(numero);
+
+		if (contaConsultada != null) {
+			contaConsultada.depositar(valor);
+		}
+	}
+
+    sacar(numero: string, valor: number): void {
+        let contaConsultada = this.consultar(numero);
+
+        if (contaConsultada != null) {
+            contaConsultada.sacar(valor);
+        }
+    }
+
+    transferir(numeroCredito: string, numeroDebito: string, valor: number){
+        let contaCredito: Conta = this.consultar(numeroCredito);
+        let contaDebito: Conta = this.consultar(numeroDebito);
+
+        if (contaCredito != null && contaDebito != null) {
+            contaDebito.transferir(contaCredito, valor);
+        }
+    }
+
+    calcularQuantidadeContas(): number {
+        return this.contas.length;
+    }
+
+    calcularTotalSaldos(): number {
+        let totalSaldo: number = 0;
+        for (let conta of this.contas) {
+            totalSaldo += conta.saldo;
+        }
+
+        return totalSaldo;
+    }
+
+    calcularMediaSaldos() {
+        return this.calcularTotalSaldos()/this.calcularQuantidadeContas();
+    }
+}
+let bancoB: Banco = new Banco();
+let conta1:Conta = new Conta("01",100);
+bancoB.inserir(conta1);
+
+
+
+console.log("-----FIM RESPOSTA QUESTÃO 3-------")
+//RESPOSTA QUESTÃO 4
+console.log("----Resposta questão 4:")
+
+class Conta2 {
+	private numero: string;
+	private saldo: number;
+
+    constructor(numero: string, saldoInicial: number) {
+		this.numero = numero;
+		this.saldo = saldoInicial;
+	}
+    getsaldo():number{
+        return this.saldo
+    }
+
+    getnumero():string{
+        return this.numero;
+    }
+	sacar(valor: number): void {
+		if (this.saldo >= valor) {
+			this.saldo = this.saldo - valor;
+		}
+	}
+
+	depositar(valor: number): void {
+		this.saldo = this.saldo + valor;
+	}
+
+	transferir(contaDestino: Conta2, valor: number): void {
+		this.sacar(valor);
+		contaDestino.depositar(valor);
+	}
+
+}
+
+class Banco2 {
+	private contas: Conta2[] = [];
+	
+	inserir(conta: Conta2): void {
+        let contaConsultada = this.consultar(conta.getnumero());
+
+        if (contaConsultada == null) {
+		    this.contas.push(conta);
+        }
+	}
+	
+	consultar(numero: string): Conta2 {
+		let contaConsultada: Conta2;
+		for (let conta of this.contas) {
+			if (conta.getnumero() == numero) {
+				contaConsultada = conta;
+				break;
+			}
+		}
+		return contaConsultada;
+	}
+
+	private consultarPorIndice(numero: string): number {
+		let indice: number = -1;
+		for (let i: number = 0; i < this.contas.length; i++) {
+			if (this.contas[i].getnumero() == numero) {
+				indice = i;
+				break;
+			}
+		}
+		return indice;
+	}
+
+	alterar(conta: Conta2): void {
+		let indice: number = this.consultarPorIndice(conta.getnumero());
+		if (indice != -1) {
+			this.contas[indice] = conta;
+		}
+	}
+
+	excluir(numero: string): void {
+		let indice: number = this.consultarPorIndice(numero);
+		
+		if (indice != -1) {
+			for (let i: number = indice; i < this.contas.length; i++) {
+				this.contas[i] = this.contas[i+1];
+			}
+
+			this.contas.pop();
+		} 
+	}
+
+	depositar(numero: string, valor: number): void {
+		let contaConsultada = this.consultar(numero);
+
+		if (contaConsultada != null) {
+			contaConsultada.depositar(valor);
+		}
+	}
+
+    sacar(numero: string, valor: number): void {
+        let contaConsultada = this.consultar(numero);
+
+        if (contaConsultada != null) {
+            contaConsultada.sacar(valor);
+        }
+    }
+
+    transferir(numeroCredito: string, numeroDebito: string, valor: number){
+        let contaCredito: Conta2 = this.consultar(numeroCredito);
+        let contaDebito: Conta2 = this.consultar(numeroDebito);
+
+        if (contaCredito != null && contaDebito != null) {
+            contaDebito.transferir(contaCredito, valor);
+        }
+    }
+
+    calcularQuantidadeContas(): number {
+        return this.contas.length;
+    }
+
+    calcularTotalSaldos(): number {
+        let totalSaldo: number = 0;
+        for (let conta of this.contas) {
+            totalSaldo += conta.getsaldo();
+        }
+
+        return totalSaldo;
+    }
+
+    calcularMediaSaldos() {
+        return this.calcularTotalSaldos()/this.calcularQuantidadeContas();
+    }
+}
+let conta : Conta2 = new Conta2("1", 100);
+let b1: Banco2 = new Banco2();
+b1.inserir(conta);
+b1.inserir(new Conta2("1", 20));
+//b.sacar("1",20);
+console.log(conta.getsaldo());
+
+b1.inserir(new Conta2("2", 2000));
+
+b1.transferir("1","2", 10);
+console.log(b1.consultar("1").getsaldo());
+console.log(b1.consultar("2").getsaldo());
+console.log(b1.calcularQuantidadeContas());
+console.log(b1.calcularTotalSaldos());
+console.log(b1.calcularMediaSaldos());
+console.log("-----FIM RESPOSTA QUESTÃO 4-------")
