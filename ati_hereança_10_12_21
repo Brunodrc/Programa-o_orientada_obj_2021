@@ -1,0 +1,394 @@
+/*
+INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DO PIAUÍ
+Curso: Análisee e desenvolvimento de sistemas - ADS
+Disciplina: Programação Orientada a Objetos
+Professor: Ely
+Aluno: BRUNO CASTRO
+*/
+/*                  __________ RESPOSTAS ATIVIDADE 10/12/21 _____________*/
+
+console.log("Resposta questão 1:")
+class Veiculo{
+	placa: string;
+	ano: number;
+
+	constructor(pl:string, ano:number){
+		this.placa = pl;
+		this.ano = ano;
+	}
+}
+//o comando extends indica que Carro pertence a classe mias alta Veiculo
+class Carro extends Veiculo{
+	modelo: string;
+	
+	constructor(pl: string, ano:number, mod:string){
+//o comando super indica que o construtor irá herdar os atributos da classe Veiculo
+		super(pl,ano);
+		this.modelo = mod;
+	}
+}
+
+class CarroEletrico extends Carro{
+	autonomiaBateria:number;
+
+	constructor(pl: string, ano: number, mod: string, bateria:number){
+		super(pl, ano, mod);
+		this.autonomiaBateria = bateria;
+	}
+}
+let suv: Veiculo = new Veiculo("BAR1234",2020);
+let renegade: Carro = new Carro("BRA4567", 2020,"SUV");
+let modelz: CarroEletrico = new CarroEletrico("TRD3456",2020,"HATCH",300);
+console.log(suv);
+console.log(renegade);
+console.log(modelz);
+
+console.log("-----FIM RESPOSTA QUESTÃO 1-------")
+
+//RESPOSTA QUESTÃO 2
+console.log("----Resposta questão 2:")
+class Calculadora{
+	private _op1:number;
+	private _op2:number;
+
+	constructor(x1:number, x2:number){
+		this._op1 = x1;
+		this._op2 = x2;
+	}
+
+	soma(): number{
+		return this._op1 + this._op2;
+	}
+// é preciso utilizar o get para que seja possivel usar esses atributos na classe filha 
+	get op1():number{
+		return this._op1;
+	}
+	get op2():number{
+		return this._op2;
+	}
+
+}
+let cal1: Calculadora = new Calculadora(21,34);
+console.log(cal1);
+
+console.log(cal1.soma());
+
+console.log("-----FIM RESPOSTA QUESTÃO 2-------")
+
+//RESPOSTA QUESTÃO 3
+console.log("----Resposta questão 3:")
+
+class CalculadoraCientifica extends Calculadora{
+	constructor(x1:number, x2:number){
+		super(x1, x2);
+	}
+	exponenciar(){
+		return this.op1 ** this.op2;
+	}
+}
+
+let potencia: CalculadoraCientifica = new CalculadoraCientifica(2,3);
+
+console.log(potencia);
+console.log(potencia.exponenciar());
+// foi preciso modificar a classe mae Calculadora porque seus atributos são privados, então, foi preciso acrescentar os metodos get para cada atributo.
+
+console.log("-----FIM RESPOSTA QUESTÃO 3-------")
+
+//RESPOSTA QUESTÃO 4
+console.log("----Resposta questão 4:")
+
+class Conta {
+	private _numero: string;
+	private _saldo: number;
+
+    constructor(numero: string, saldoInicial: number) {
+		this._numero =numero;
+		this._saldo = saldoInicial;
+	}
+    get saldo():number{
+        return this._saldo
+    }
+
+    get numero():string{
+        return this._numero;
+    }
+	sacar(valor: number): void {
+		if (this._saldo >= valor) {
+			this._saldo = this._saldo - valor;
+		}
+	}
+
+	depositar(valor: number): void {
+		this._saldo = this._saldo + valor;
+	}
+
+	transferir(contaDestino: Conta
+	, valor: number): void {
+		this.sacar(valor);
+		contaDestino.depositar(valor);
+	}
+
+}
+class Poupança extends Conta{
+	private _taxadejuros:number;
+
+	constructor(numero:string, _saldo:number, taxadejuros: number){
+		super(numero,_saldo);
+		this._taxadejuros = taxadejuros;
+	}
+
+	renderjuros():void{
+		this.depositar(this.saldo*(this._taxadejuros/100));
+	}
+
+	get taxajuros():number{
+		return this._taxadejuros;
+	}
+
+}
+
+class Banco {
+	private contas: Conta[] = [];
+	
+	inserir(conta: Conta
+	): void {
+        let contaConsultada = this.consultar(conta.numero);
+
+        if (contaConsultada == null) {
+		    this.contas.push(conta);
+        }
+	}
+	
+	consultar(_numero: string): Conta
+ {
+		let contaConsultada: Conta
+	;
+		for (let conta of this.contas) {
+			if (conta.numero == _numero) {
+				contaConsultada = conta;
+				break;
+			}
+		}
+		return contaConsultada;
+	}
+
+	private consultarPorIndice(_numero: string): number {
+		let indice: number = -1;
+		for (let i: number = 0; i < this.contas.length; i++) {
+			if (this.contas[i].numero == _numero) {
+				indice = i;
+				break;
+			}
+		}
+		return indice;
+	}
+
+	alterar(conta: Conta
+	): void {
+		let indice: number = this.consultarPorIndice(conta.numero);
+		if (indice != -1) {
+			this.contas[indice] = conta;
+		}
+	}
+
+	excluir(numero: string): void {
+		let indice: number = this.consultarPorIndice(numero);
+		
+		if (indice != -1) {
+			for (let i: number = indice; i < this.contas.length; i++) {
+				this.contas[i] = this.contas[i+1];
+			}
+
+			this.contas.pop();
+		} 
+	}
+
+	depositar(numero: string, valor: number): void {
+		let contaConsultada = this.consultar(numero);
+
+		if (contaConsultada != null) {
+			contaConsultada.depositar(valor);
+		}
+	}
+
+    sacar(numero: string, valor: number): void {
+        let contaConsultada = this.consultar(numero);
+
+        if (contaConsultada != null) {
+            contaConsultada.sacar(valor);
+        }
+    }
+
+    transferir(numeroCredito: string, numeroDebito: string, valor: number){
+        let contaCredito: Conta
+	 = this.consultar(numeroCredito);
+        let contaDebito: Conta
+	 = this.consultar(numeroDebito);
+
+        if (contaCredito != null && contaDebito != null) {
+            contaDebito.transferir(contaCredito, valor);
+        }
+    }
+	renderjuros(numero:string):void{
+		let contaconsultada:Conta = this.consultar(numero);
+		if (contaconsultada instanceof Poupança){
+			let ehpoupança: Poupança = <Poupança> contaconsultada;
+			return ehpoupança.renderjuros();
+		}
+
+	}
+
+}
+let conta : Conta = new Conta("1", 100);
+let b1: Banco = new Banco();
+let poup1: Poupança = new Poupança("2",1000,0.5);
+b1.inserir(poup1);
+console.log(poup1.saldo);
+b1.renderjuros("2");
+console.log(poup1.saldo);
+
+console.log("-----FIM RESPOSTA QUESTÃO 4-------")
+
+//RESPOSTA QUESTÃO 5
+console.log("----Resposta questão 5:")
+class Produto{
+	private _id:string;
+	private _descrição:string;
+	private _quantidade: number;
+	private _valor:number;
+
+	constructor(id:string, descrição:string, quantidade:number, valor:number){
+		this._id = id;
+		this._descrição = descrição;
+		this._quantidade = quantidade;
+		this._valor = valor;
+	}
+	get id():string{
+		return this._id;
+	}
+	get qtd():number{
+		return this._quantidade;
+	}
+	get valor():number{
+		return this._valor;
+	}
+	repor(quantidade:number):number{
+		return this.qtd + quantidade;
+	}
+	darbaixa(quantidade:number):number{
+		return this.qtd + quantidade;
+	}
+}
+
+class ProdutoPerecivel extends Produto {
+	private _date:Date;
+
+	constructor(id:string, descrição:string, quantidade:number, valor:number, data:Date){
+		super(id, descrição, quantidade, valor);
+		this._date = data; //olhei lá na documentação, mas não compreendi bem a inicialização do tipo data
+	}
+	get data_prod():Date{
+		return this._date; 
+	}
+	validade(data:Date):void{
+		let data1:Date = data;
+		let datafim:Date = this.data_prod;
+		let validade:number = datafim.getDate() - data1.getDate();
+		if (validade < 0){
+			console.log("Fora da validade!");
+			
+		}else{
+			console.log("Ainda está válido!");
+			
+		}
+	}
+}
+
+class Estoque{
+	private _produtos:Produto[] = [];
+
+		inserir_p(produto: Produto): void {
+			let prodConsultado = this.consultar(produto.id);
+	
+			if (prodConsultado == null) {
+				this._produtos.push(produto);
+			}
+		}
+		
+		consultar(id: string): Produto {
+			let prodconsultado: Produto;
+		
+			for (let produto of this._produtos) {
+				if (produto.id == id) {
+					prodconsultado = produto;
+					break;
+				}
+			}
+			return prodconsultado;
+		}
+
+		private _consultarIndice(id: string): number {
+			let indice: number = -1;
+			for (let i: number = 0; i < this._produtos.length; i++) {
+				if (this._produtos[i].id == id) {
+					indice = i;
+					break;
+				}
+			}
+			return indice;
+		}
+	
+		excluir(id: string): void {
+			let indice:number = this._consultarIndice(id);
+			
+			if (indice != -1) {
+				for (let i: number = indice; i < this._produtos.length; i++) {
+					this._produtos[i] = this._produtos[i+1];
+				}
+	
+				this._produtos.pop();
+			} 
+		}
+		
+		reporestoq(id:string, quantidade: number): void{
+			let prodConsultado = this.consultar(id);
+	
+			if (prodConsultado == null){
+				prodConsultado.repor(quantidade);
+			}
+		}
+
+		darBaixaestoq(id:string, quantidade: number):void{
+			let prodConsultado = this.consultar(id);
+	
+			if (prodConsultado == null){
+				prodConsultado.darbaixa(quantidade);
+			}
+		}
+
+		/* Dúvida sobre o comportamento e manipulação do tipo date.
+		estoqVencido():void{
+			
+			for (let i:number =0; i < this._produtos.length; i++){
+				if (this._produtos[i] instanceof ProdutoPerecivel){
+					let ehperecivel : ProdutoPerecivel  = <ProdutoPerecivel> this._produtos[i];
+
+					if(ehperecivel.validade < 0){
+
+					}
+				}
+			}
+		}
+
+*/
+}
+let arroz: Produto = new Produto("1", 'cereal', 10, 6.9);
+let mercearia: Estoque;
+mercearia.inserir_p(arroz);
+mercearia.inserir_p(new Produto("2",'cereal e proteina',15, 6.5));
+mercearia.inserir_p(new ProdutoPerecivel("3",'cereal,vitamina e proteina',25, 7.5,new Date(2022,10,20)));
+
+console.log(arroz);
+
+console.log("-----FIM RESPOSTA QUESTÃO 5-------")
